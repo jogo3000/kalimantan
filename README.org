@@ -1,0 +1,9 @@
+* Kalimantan
+Kalimantan is an experiment to see how much of Clojure inspired
+functional programming can be implemented in pure Java. I'm trying to
+find out what aspects come from the Java language itself and what is a
+result of the standard Java libraries.
+** Why "Kalimantan"?
+Java is an island in Indonesia. Kalimantan is another island in
+Indonesia. Kalimantan (the library) can be seen as an alternate
+reality version of Java standard library.
