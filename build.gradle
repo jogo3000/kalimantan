@@ -1,10 +1,10 @@
 plugins {
         id 'java-library'
+        id 'eclipse'
 }
 
-java {
-     sourceCompatibility = JavaVersion.VERSION_14
-     targetCompatibility = JavaVersion.VERSION_14
+compileJava {
+            options.release = 14
 }
 
 repositories {
@@ -13,6 +13,7 @@ repositories {
 
 tasks.withType(JavaCompile) {
    options.compilerArgs += "--enable-preview"
+   options.release = 14
 }
 
 dependencies {

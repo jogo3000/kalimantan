@@ -8,6 +8,37 @@ import static kalimantan.Core.*;
 class CoreTests {
 
     @Test
+    @DisplayName("Empty cells are equal")
+    void testEmptyCellEqual() {
+        assertEquals(cons(null, null), cons(null, null));
+    }
+
+    @Test
+    @DisplayName("Cells with equal content are equal")
+    void testEqualCells() {
+        assertEquals(cons(1, null), cons(1, null));
+    }
+
+    @Test
+    @DisplayName("Lists with equal contents are equal")
+    void testEqualLists() {
+        assertEquals(list(1, 2, 3), list(1, 2, 3));
+    }
+
+    @Test
+    @DisplayName("Cells with non equal content are not equal")
+    void testNotEqualCells() {
+        assertNotEquals(cons(1, null), cons(2, null));
+    }
+
+    @Test
+    @DisplayName("Lists with non equal content are not equal")
+    void testNotEqualLists() {
+        assertNotEquals(list(1, 2, 3), list(1, 2, 4));
+    }
+
+
+    @Test
     @DisplayName("first returns the first element in a Seq")
     void test1() {
         var seq = cons(1, null);

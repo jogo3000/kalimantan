@@ -3,14 +3,14 @@ import java.util.function.*;
 
 record Cell<T> (T first, Seq<T> rest) implements Seq<T> {}
 
-public interface Core {
+record EmptySeq<T>() implements Seq<T> {
+    public T first() { return null; }
+    public Seq<T> rest() { return this; }
+    @Override
+    public boolean isEmpty() { return true; }
+}
 
-    class EmptySeq<T> implements Seq<T> {
-        public T first() { return null; }
-        public Seq<T> rest() { return this; }
-        @Override
-        public boolean isEmpty() { return true; }
-    }
+public interface Core {
 
     static <T> Seq<T> cons(final T val, final Seq<T> seq) {
         return new Cell<T>(val, seq);
@@ -35,12 +35,16 @@ public interface Core {
         return seq;
     }
 
-    // TODO `map`
+
     // TODO `filter`
 
     static <T> boolean isEmpty(Seq<T> s) {
         return s.isEmpty();
     }
+
+    // TODO reduce with no initial value. How to, though? Reduce is
+    // supposed to be able to return a different type than the Seq it
+    // is consuming.  Are there union types in Java?
 
     static <R, T> R reduce(final BiFunction<R, T, R> fun, final R initial, final Seq<T> seq) {
         R acc = initial;
