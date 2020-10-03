@@ -1,5 +1,7 @@
 package kalimantan;
 
+import java.util.function.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
@@ -26,6 +28,12 @@ class CoreTests {
     }
 
     @Test
+    @DisplayName("Empty lists are equal")
+    void testEmptyListsEqual() {
+        assertEquals(list(), list());
+    }
+
+    @Test
     @DisplayName("Cells with non equal content are not equal")
     void testNotEqualCells() {
         assertNotEquals(cons(1, null), cons(2, null));
@@ -36,7 +44,6 @@ class CoreTests {
     void testNotEqualLists() {
         assertNotEquals(list(1, 2, 3), list(1, 2, 4));
     }
-
 
     @Test
     @DisplayName("first returns the first element in a Seq")
@@ -78,5 +85,17 @@ class CoreTests {
     @DisplayName("reducing collection of integers with a sum function")
     void test5() {
         assertEquals(15, reduce((Integer acc, Integer c) -> acc + c, 0, list(1, 2, 3, 4, 5)));
+    }
+
+    @Test
+    @DisplayName("mapping a Seq of integers with incrementing function returns a new Seq with the elements incremented")
+    void testMap() {
+        assertEquals(list(2, 3, 4), map((Integer c) -> c + 1, list(1, 2, 3)));
+    }
+
+    @Test
+    @DisplayName("mapping an empty Seq returns an empty Seq")
+    void testMapEmptySeq() {
+        assertEquals(list(), map(Function.identity(), list()));
     }
 }

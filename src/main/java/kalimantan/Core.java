@@ -32,9 +32,18 @@ public interface Core {
             seq = cons(args[c], seq);
             c--;
         }
-        return seq;
+        return seq != null ? seq : new EmptySeq();
     }
 
+    static <T, R> Seq<R> map(Function<T, R> fun, Seq<T> s) {
+        if (isEmpty(s)) {
+            return new EmptySeq();
+        }
+        return s.rest() != null ?
+            // This will blow up the stack when `s` is large enough
+            cons(fun.apply(first(s)), map(fun, rest(s)))
+            : cons(fun.apply(first(s)), null) ;
+    }
 
     // TODO `filter`
 
