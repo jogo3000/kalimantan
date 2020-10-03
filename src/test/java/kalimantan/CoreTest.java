@@ -104,4 +104,10 @@ class CoreTests {
     void testFilterPositives() {
         assertEquals(list(1, 2, 3), filter((Integer i) -> i > 0, list(1, -1, -2, 2, 3, -5)));
     }
+
+    @Test
+    @DisplayName("last returns the last element of a seq")
+    void testLast() {
+        assertEquals("foo", last(list("bar", "baz", "foo")));
+    }
 }

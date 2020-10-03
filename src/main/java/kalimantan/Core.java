@@ -24,6 +24,17 @@ public interface Core {
         return seq.rest() != null ? seq.rest() : new EmptySeq();
     }
 
+    static <T> T last(final Seq<T> s) {
+        if (isEmpty(s)) {
+            return null;
+        }
+        Seq<T> c = s;
+        while (c.rest() != null) {
+            c = rest(c);
+        }
+        return first(c);
+    }
+
     static <T> Seq<T> list(final T... args) {
         var len = args != null ? args.length : 0;
         Seq<T> seq = null;
