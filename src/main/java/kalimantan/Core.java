@@ -13,7 +13,7 @@ record EmptySeq<T>() implements Seq<T> {
 public interface Core {
 
     static <T> Seq<T> cons(final T val, final Seq<T> seq) {
-        return new Cell<T>(val, seq);
+        return new Cell<T>(val, (seq == null || isEmpty(seq)) ? null : seq);
     }
 
     static <T> T first(final Seq<T> seq) {
@@ -45,7 +45,18 @@ public interface Core {
             : cons(fun.apply(first(s)), null) ;
     }
 
-    // TODO `filter`
+    static <T> Seq<T> filter(Predicate<T> pred, Seq<T> s) {
+        if (isEmpty(s)) {
+            return new EmptySeq();
+        }
+
+        if (pred.test(first(s))) {
+            return cons(first(s), filter(pred, rest(s)));
+        } else {
+            return filter(pred, rest(s));
+        }
+
+    }
 
     static <T> boolean isEmpty(Seq<T> s) {
         return s.isEmpty();

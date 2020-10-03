@@ -98,4 +98,10 @@ class CoreTests {
     void testMapEmptySeq() {
         assertEquals(list(), map(Function.identity(), list()));
     }
+
+    @Test
+    @DisplayName("Filtering only positive values from a collection")
+    void testFilterPositives() {
+        assertEquals(list(1, 2, 3), filter((Integer i) -> i > 0, list(1, -1, -2, 2, 3, -5)));
+    }
 }
