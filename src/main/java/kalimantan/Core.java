@@ -12,16 +12,16 @@ record EmptySeq<T>() implements Seq<T> {
 
 public interface Core {
 
-    static <T> Seq<T> cons(final T val, final Seq<T> seq) {
-        return new Cell<T>(val, (seq == null || isEmpty(seq)) ? null : seq);
+    static <T> Seq<T> cons(final T val, final Seq<T> s) {
+        return new Cell<T>(val, (s == null || isEmpty(s)) ? null : s);
     }
 
-    static <T> T first(final Seq<T> seq) {
-        return seq.first();
+    static <T> T first(final Seq<T> s) {
+        return s.first();
     }
 
-    static <T> Seq<T> rest(final Seq<T> seq) {
-        return seq.rest() != null ? seq.rest() : new EmptySeq();
+    static <T> Seq<T> rest(final Seq<T> s) {
+        return s.rest() != null ? s.rest() : new EmptySeq();
     }
 
     static <T> T last(final Seq<T> s) {
@@ -37,13 +37,13 @@ public interface Core {
 
     static <T> Seq<T> list(final T... args) {
         var len = args != null ? args.length : 0;
-        Seq<T> seq = null;
+        Seq<T> s = null;
         var c = len - 1;
         while (c >= 0) {
-            seq = cons(args[c], seq);
+            s = cons(args[c], s);
             c--;
         }
-        return seq != null ? seq : new EmptySeq();
+        return s != null ? s : new EmptySeq();
     }
 
     static <T, R> Seq<R> map(Function<T, R> fun, Seq<T> s) {
@@ -77,9 +77,9 @@ public interface Core {
     // supposed to be able to return a different type than the Seq it
     // is consuming.  Are there union types in Java?
 
-    static <R, T> R reduce(final BiFunction<R, T, R> fun, final R initial, final Seq<T> seq) {
+    static <R, T> R reduce(final BiFunction<R, T, R> fun, final R initial, final Seq<T> s) {
         R acc = initial;
-        Seq<T> c = seq;
+        Seq<T> c = s;
         do {
             acc = fun.apply(acc, first(c));
             c = rest(c);
