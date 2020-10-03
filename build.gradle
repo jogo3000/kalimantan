@@ -1,0 +1,32 @@
+plugins {
+        id 'java-library'
+}
+
+java {
+     sourceCompatibility = JavaVersion.VERSION_14
+     targetCompatibility = JavaVersion.VERSION_14
+}
+
+repositories {
+             mavenCentral()
+}
+
+tasks.withType(JavaCompile) {
+   options.compilerArgs += "--enable-preview"
+}
+
+dependencies {
+     testImplementation(platform('org.junit:junit-bom:5.7.0'))
+     testImplementation('org.junit.jupiter:junit-jupiter')
+}
+
+test {
+     jvmArgs(['--enable-preview'])
+      useJUnitPlatform()
+      testLogging {
+      events "passed", "skipped", "failed"
+      }
+}
+
+
+version = '1.2.1'
