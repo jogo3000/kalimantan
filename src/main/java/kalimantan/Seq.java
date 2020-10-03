@@ -2,6 +2,6 @@ package kalimantan;
 
 
 public interface Seq<T> {
-    Cell<T> next();
-    T getVal();
+    Seq<T> rest();
+    T first();
 }
