@@ -110,4 +110,16 @@ class CoreTests {
     void testLast() {
         assertEquals("foo", last(list("bar", "baz", "foo")));
     }
+
+    @Test
+    @DisplayName("take 5 returns first five elements of a seq")
+    void testTake5() {
+        assertEquals(list(1, 2, 3, 4, 5), take(5, list(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)));
+    }
+
+    @Test
+    @DisplayName("take 5 from a shorter seq returns the whole seq")
+    void testTakeTooMuch() {
+        assertEquals(list(1, 2, 3), take(5, list(1, 2, 3)));
+    }
 }

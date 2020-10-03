@@ -86,4 +86,8 @@ public interface Core {
         } while (!isEmpty(c));
         return acc;
     }
+
+    static <T> Seq<T> take(final int i, final Seq<T> s) {
+        return (i <= 0 || isEmpty(s)) ? new EmptySeq() : cons(first(s), take(i - 1, rest(s)));
+    }
 }
