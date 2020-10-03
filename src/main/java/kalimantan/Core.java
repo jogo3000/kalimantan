@@ -78,13 +78,9 @@ public interface Core {
     // is consuming.  Are there union types in Java?
 
     static <R, T> R reduce(final BiFunction<R, T, R> fun, final R initial, final Seq<T> s) {
-        R acc = initial;
-        Seq<T> c = s;
-        do {
-            acc = fun.apply(acc, first(c));
-            c = rest(c);
-        } while (!isEmpty(c));
-        return acc;
+        if (isEmpty(s)) return initial;
+
+        return reduce(fun, fun.apply(initial, first(s)), rest(s));
     }
 
     static <T> Seq<T> take(final int i, final Seq<T> s) {
