@@ -90,4 +90,8 @@ public interface Core {
     static <T> Seq<T> take(final int i, final Seq<T> s) {
         return (i <= 0 || isEmpty(s)) ? new EmptySeq() : cons(first(s), take(i - 1, rest(s)));
     }
+
+    static <T> int count(Seq<T> s) {
+        return reduce((Integer acc, T v) -> acc + 1, 0, s);
+    }
 }

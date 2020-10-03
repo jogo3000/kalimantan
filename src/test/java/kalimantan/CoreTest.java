@@ -122,4 +122,10 @@ class CoreTests {
     void testTakeTooMuch() {
         assertEquals(list(1, 2, 3), take(5, list(1, 2, 3)));
     }
+
+    @Test
+    @DisplayName("count returns 5 for a seq of length 5")
+    void testCount5() {
+        assertEquals(5, count(list(1, 2, 3, 4, 5)));
+    }
 }
