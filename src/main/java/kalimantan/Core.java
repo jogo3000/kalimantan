@@ -35,15 +35,17 @@ public interface Core {
         return first(c);
     }
 
-    static <T> Seq<T> list(final T... args) {
-        var len = args != null ? args.length : 0;
-        Seq<T> s = null;
-        var c = len - 1;
-        while (c >= 0) {
-            s = cons(args[c], s);
-            c--;
+    // TODO: how to make this immutable? Maybe Java interop may be considered dirty already.
+    static <T> Seq<T> seq(T[] arr) {
+        Seq<T> s = new EmptySeq();
+        for (int i = arr.length -1; i >= 0; i--) {
+            s = cons(arr[i], s);
         }
-        return s != null ? s : new EmptySeq();
+        return s;
+    }
+
+    static <T> Seq<T> list(final T... args) {
+        return args != null ? seq(args) : new EmptySeq();
     }
 
     static <T, R> Seq<R> map(Function<T, R> fun, Seq<T> s) {
