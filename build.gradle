@@ -18,11 +18,11 @@ dependencies {
 }
 
 test {
-     jvmArgs(['--enable-preview'])
-      useJUnitPlatform()
-      testLogging {
-      events "passed", "skipped", "failed"
-      }
+     jvmArgs += '--enable-preview'
+     useJUnitPlatform()
+     testLogging {
+     events "passed", "skipped", "failed"
+     }
 }
 
 tasks.withType(JavaCompile) {
