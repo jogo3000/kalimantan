@@ -82,6 +82,23 @@ public class CoreTest {
     }
 
     @Test
+    @DisplayName("cons is immutable")
+    void testConsImmutable() {
+        var seq = list();
+        var seq2 = list(1, 2);
+        var seq3 = list(1, 2, 3);
+
+        assertEquals(list(1), cons(1, seq));
+        assertEquals(list(), seq);
+
+        assertEquals(list(3, 1, 2), cons(3, seq2));
+        assertEquals(list(1, 2), seq2);
+
+        assertEquals(list(4, 1, 2, 3), cons(4, seq3));
+        assertEquals(list(1, 2, 3), seq3);
+    }
+
+    @Test
     @DisplayName("reducing collection of integers with a sum function")
     void test5() {
         assertEquals(15, reduce((Integer acc, Integer c) -> acc + c, 0, list(1, 2, 3, 4, 5)));
