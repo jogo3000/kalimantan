@@ -3,13 +3,6 @@ import java.util.function.*;
 
 record Cell<T> (T first, Seq<T> rest) implements Seq<T> {}
 
-record EmptySeq<T>() implements Seq<T> {
-    public T first() { return null; }
-    public Seq<T> rest() { return this; }
-    @Override
-    public boolean isEmpty() { return true; }
-}
-
 public interface Core {
 
     static <T> Seq<T> cons(final T val, final Seq<T> s) {

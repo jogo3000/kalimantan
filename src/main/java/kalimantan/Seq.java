@@ -8,3 +8,10 @@ public interface Seq<T> {
         return false;
     }
 }
+
+record EmptySeq<T>() implements Seq<T> {
+    public T first() { return null; }
+    public Seq<T> rest() { return this; }
+    @Override
+    public boolean isEmpty() { return true; }
+}
