@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 
 import static kalimantan.Core.*;
 
-class CoreTests {
+public class CoreTest {
 
     @Test
     @DisplayName("Empty cells are equal")
