@@ -128,4 +128,10 @@ class CoreTests {
     void testCount5() {
         assertEquals(5, count(list(1, 2, 3, 4, 5)));
     }
+
+    @Test
+    @DisplayName("count returns 0 for an empty seq")
+    void testCountEmpty() {
+        assertEquals(0, count(list()));
+    }
 }
