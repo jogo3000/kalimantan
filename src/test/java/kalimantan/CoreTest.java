@@ -105,6 +105,24 @@ public class CoreTest {
     }
 
     @Test
+    @DisplayName("reducing collection of integers with a sum function and no initial value")
+    void testReduceWithoutInitial() {
+        assertEquals(15, reduce((Integer acc, Integer c) -> acc + c, list(1, 2, 3, 4, 5)));
+    }
+
+    @Test
+    @DisplayName("reducing empty collection without initial value returns null")
+    void testReduceEmptyCollectionWithoutInitial() {
+        assertNull(reduce((Integer acc, Integer c) -> acc + c, list()));
+    }
+
+    @Test
+    @DisplayName("recuding collection with 1 element without initial value returns initial value")
+    void testReduce1ElementCollectionWithoutInitial() {
+        assertEquals(20, reduce((Integer acc, Integer c) -> acc + c, list(20)));
+    }
+
+    @Test
     @DisplayName("mapping a Seq of integers with incrementing function returns a new Seq with the elements incremented")
     void testMap() {
         assertEquals(list(2, 3, 4), map((Integer c) -> c + 1, list(1, 2, 3)));

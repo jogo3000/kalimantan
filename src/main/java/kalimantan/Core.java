@@ -68,14 +68,18 @@ public interface Core {
         return s.isEmpty();
     }
 
-    // TODO reduce with no initial value. How to, though? Reduce is
-    // supposed to be able to return a different type than the Seq it
-    // is consuming.  Are there union types in Java?
-
     static <R, T> R reduce(final BiFunction<R, T, R> fun, final R initial, final Seq<T> s) {
         if (isEmpty(s)) return initial;
 
         return reduce(fun, fun.apply(initial, first(s)), rest(s));
+    }
+
+    static <R> R reduce(final BiFunction<R, R, R> fun, final Seq<R> s) {
+        if (isEmpty(s))
+            return null;
+        if (isEmpty(rest(s)))
+            return first(s);
+        return reduce(fun, fun.apply(first(s), first(rest(s))), rest(rest(s)));
     }
 
     static <T> Seq<T> take(final int i, final Seq<T> s) {
