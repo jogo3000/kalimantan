@@ -82,6 +82,16 @@ public class CoreTest {
     }
 
     @Test
+    @DisplayName("making a big list does not blow the stack")
+    void testBigList() {
+        var bigArray = new Integer[10_000];
+        for (var i = 0; i < bigArray.length; i++)
+            bigArray[i] = i;
+
+        assertDoesNotThrow(() -> list(bigArray));
+    }
+
+    @Test
     @DisplayName("cons is immutable")
     void testConsImmutable() {
         var seq = list();
@@ -135,6 +145,16 @@ public class CoreTest {
     }
 
     @Test
+    @DisplayName("mapping a big collection does not blow the stack")
+    void testMapHugeCollection() {
+        var bigCollection = new Integer[10_000];
+        for (int i = 0; i < bigCollection.length; i++)
+            bigCollection[i] = i;
+
+        assertDoesNotThrow(() ->  map((Integer i) -> i + 1, list(bigCollection)));
+    }
+
+    @Test
     @DisplayName("Filtering only positive values from a collection")
     void testFilterPositives() {
         assertEquals(list(1, 2, 3), filter((Integer i) -> i > 0, list(1, -1, -2, 2, 3, -5)));
@@ -168,5 +188,17 @@ public class CoreTest {
     @DisplayName("count returns 0 for an empty seq")
     void testCountEmpty() {
         assertEquals(0, count(list()));
+    }
+
+    // @Test
+    // @DisplayName("vector with no arguments returns an empty vector")
+    // void testEmptyVec() {
+    //     assertEquals(0, count(vector()));
+    // }
+
+    @Test
+    @DisplayName("You can return elements from the vector")
+    void testIndexable() {
+        //        assertEquals(0, get(vector(0, 1, 2), 0));
     }
 }
